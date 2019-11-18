@@ -1,0 +1,10 @@
+IMPORT JSON
+
+FILE = GET("data.json")
+
+# load is a json library function that converts json objects into python dictionaries. Psuedocode excludes most parameters.
+data_dic = json.LOAD(file)
+
+REQUEST = INPUT(location) # User inputs the location where they would like to acquire data for estimated actual solar radiation data and forecasts
+FOR EACH entry IN DATA_DIC {
+  GRAPH(DATA = [pv_estimate, pv_estimate10, pv_estimate90], TYPE = bar)
