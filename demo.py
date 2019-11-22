@@ -25,7 +25,7 @@ def world_sol_radiation_data_api():
 
   statuscode = response.status_code
   api_content = response.json()
-  print(statuscode)
+  #print(statuscode)
   #print(response.content)
   print(api_content)
 
@@ -46,7 +46,7 @@ def rooftop_sites():
            })
   statuscode = response.status_code
   api_content = response.json()
-  print(statuscode)
+  #print(statuscode)
   #print(response.content)
   print(api_content)
 
@@ -56,6 +56,6 @@ def world_pv_power:
 
    )
 
+world_data = json.loads(world_sol_radiation_data_api())
 
-world_sol_radiation_data_api()
-rooftop_sites()
+rooftop_data = json.loads(rooftop_sites())
