@@ -57,5 +57,7 @@ def world_pv_power:
    )
 
 world_data = json.loads(world_sol_radiation_data_api())
+print(world_data)
 
 rooftop_data = json.loads(rooftop_sites())
+print(rooftop_data)
