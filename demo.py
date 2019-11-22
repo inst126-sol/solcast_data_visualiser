@@ -27,7 +27,7 @@ def world_sol_radiation_data_api():
   api_content = response.json()
   #print(statuscode)
   #print(response.content)
-  print(api_content)
+  return api_content
 
 # Accessing Solcast API for Rooftop Sites at point Content should include estimated actuals
 
@@ -48,16 +48,35 @@ def rooftop_sites():
   api_content = response.json()
   #print(statuscode)
   #print(response.content)
-  print(api_content)
+  return api_content
 
-def world_pv_power:
+def world_pv_power():
 
    response = requests.get(
 
    )
 
-world_data = json.loads(world_sol_radiation_data_api())
-print(world_data)
 
-rooftop_data = json.loads(rooftop_sites())
+#
+raw_world_data = world_sol_radiation_data_api()['estimated_actuals']
+
+world_data = {}
+print(type(raw_world_data))
+# dictionary converter - preps data for constructing pandas dataframe
+for variable in raw_world_data[0]:
+    world_data[variable] = []
+for i in range(len(raw_world_data)):
+    for variable in raw_world_data[i]:
+        print(type(variable))
+        #temp = world_data[variable]
+        #if variable not in world_data:
+        #    world_data[variable]=[]
+        #    newList.append(raw_world_data[variable])
+        #else:
+        list = world_data[variable]
+        print(type(raw_world_data[i][variable]))
+        list.append(raw_world_data[i][variable])
+print(world_data['ghi'])
+
+rooftop_data = rooftop_sites()['estimated_actuals']
 print(rooftop_data)
