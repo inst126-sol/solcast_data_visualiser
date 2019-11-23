@@ -27,7 +27,7 @@ def world_sol_radiation_data_api():
   api_content = response.json()
   print(statuscode)
   #print(response.content)
-  print(api_content)
+  return api_content
 
 # Accessing Solcast API for Rooftop Sites at point Content should include estimated actuals
 # Curently returns 404
@@ -48,7 +48,7 @@ def rooftop_sites():
   api_content = response.json()
   print(statuscode)
   #print(response.content)
-  print(api_content)
+  return api_content
 
 # get data from api
 raw_world_data = world_sol_radiation_data_api()['estimated_actuals']
