@@ -56,27 +56,29 @@ def world_pv_power():
 
    )
 
-
-#
+# get data from api
 raw_world_data = world_sol_radiation_data_api()['estimated_actuals']
+raw_rooftop_data = rooftop_sites()['estimated_actuals']
 
-world_data = {}
-print(type(raw_world_data))
-# dictionary converter - preps data for constructing pandas dataframe
-for variable in raw_world_data[0]:
-    world_data[variable] = []
-for i in range(len(raw_world_data)):
-    for variable in raw_world_data[i]:
-        print(type(variable))
-        #temp = world_data[variable]
-        #if variable not in world_data:
-        #    world_data[variable]=[]
-        #    newList.append(raw_world_data[variable])
-        #else:
-        list = world_data[variable]
-        print(type(raw_world_data[i][variable]))
-        list.append(raw_world_data[i][variable])
-print(world_data['ghi'])
+# convert json data into dictionary readable by panda - bring over to main branch
+def convert_data(raw_data):
+    data = {}
+    # initialize key-value pairs as empty lists
+    for variable in raw_data[0]:
+        data[variable] = []
+    # restructure raw data into dictionary with variable labels as keys and data as values
+    for i in range(len(raw_data)):
+        for variable in raw_data[i]:
+            list = data[variable]
+            list.append(raw_data[i][variable])
+    # construct dataframe
+    df = pd.DataFrame.from_dict(data)
+    return df
 
-rooftop_data = rooftop_sites()['estimated_actuals']
-print(rooftop_data)
+world_data = convert_data(raw_world_data)
+rooftop_data = convert_data(raw_rooftop_data)
+
+world_df = pd.DataFrame.from_dict(world_data)
+rooftop_df = pd.DataFrame.from_dict(rooftop_data)
+
+print(world_df.head(25))
