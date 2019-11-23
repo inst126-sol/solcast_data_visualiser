@@ -75,10 +75,7 @@ def convert_data(raw_data):
     df = pd.DataFrame.from_dict(data)
     return df
 
-world_data = convert_data(raw_world_data)
-rooftop_data = convert_data(raw_rooftop_data)
-
-world_df = pd.DataFrame.from_dict(world_data)
-rooftop_df = pd.DataFrame.from_dict(rooftop_data)
+world_df = convert_data(raw_world_data)
+rooftop_df = convert_data(raw_rooftop_data)
 
 print(world_df.head(25))
