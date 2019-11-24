@@ -75,23 +75,24 @@ def convert_data(raw_data):
     # construct dataframe
     df = pd.DataFrame.from_dict(data)
     return df
+
 world_df = convert_data(raw_world_data)
 rooftop_df = convert_data(raw_rooftop_data)
 
-#print(world_df.head(25))
 # create a list of times from 'period_end' - these will be our axis labels
-def 
+def time_labels(data_frame):
     times = []
-    for i in range(len(world_df)):
-        date_time = world_df['period_end'][i]
+    for i in range(len(data_frame)):
+        date_time = data_frame['period_end'][i]
         #print(i)
         time = date_time[11:16]
         #print(time)
         times.append(time)
-    world_df['period_end_time'] = times
+    return times
+
+world_df['period_end_time'] = time_labels(world_df)
 
 # plot world_df as lineplot
-#world_fig = plt.figure(figsize = (7,4))
 plt.plot('period_end','ghi', data=world_df)
 plt.title('ghi: estimated actual')
 plt.xlabel('Time (GMT+0)')
