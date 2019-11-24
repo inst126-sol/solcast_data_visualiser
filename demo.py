@@ -1,7 +1,12 @@
 import requests
 import json
 import pandas as pd
+<<<<<<< HEAD
 
+=======
+import matplotlib.pyplot as plt
+import numpy as np
+>>>>>>> 17bdec3f906003ac8e554c19138a388c35c3de8e
 api_base = 'https://api.solcast.com.au'
 
 solcast_api_key =  "U7mG4zUHGW3gczhlcZslxE2QiWDOTGJl"
@@ -53,6 +58,7 @@ def rooftop_sites():
 def world_pv_power():
 
    response = requests.get(
+<<<<<<< HEAD
        "https://api.solcast.com.au/world_pv_power/estimated_actuals.json",
        params = {
            'api_key': solcast_api_key,
@@ -66,6 +72,10 @@ def world_pv_power():
    api_content = response.json()
    print(api_content)
 
+=======
+
+   )
+>>>>>>> 17bdec3f906003ac8e554c19138a388c35c3de8e
 
 # get data from api
 raw_world_data = world_sol_radiation_data_api()['estimated_actuals']
@@ -89,4 +99,28 @@ def convert_data(raw_data):
 world_df = convert_data(raw_world_data)
 rooftop_df = convert_data(raw_rooftop_data)
 
+<<<<<<< HEAD
 print(world_df.head(25))
+=======
+# create a list of times from 'period_end' - these will be our axis labels
+def time_labels(data_frame):
+    times = []
+    for i in range(len(data_frame)):
+        date_time = data_frame['period_end'][i]
+        #print(i)
+        time = date_time[11:16]
+        #print(time)
+        times.append(time)
+    return times
+
+world_df['period_end_time'] = time_labels(world_df)
+
+# plot world_df as lineplot
+plt.plot('period_end','ghi', data=world_df)
+plt.title('ghi: estimated actual')
+plt.xlabel('Time (GMT+0)')
+plt.ylabel('ghi')
+plt.xticks(world_df['period_end'], world_df['period_end_time'], rotation = 'vertical')
+plt.subplots_adjust(right=4, top = 2)
+plt.show()
+>>>>>>> 17bdec3f906003ac8e554c19138a388c35c3de8e
