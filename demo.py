@@ -1,12 +1,8 @@
 import requests
 import json
 import pandas as pd
-<<<<<<< HEAD
-
-=======
 import matplotlib.pyplot as plt
 import numpy as np
->>>>>>> 17bdec3f906003ac8e554c19138a388c35c3de8e
 api_base = 'https://api.solcast.com.au'
 
 solcast_api_key =  "U7mG4zUHGW3gczhlcZslxE2QiWDOTGJl"
@@ -14,17 +10,20 @@ solcast_api_key =  "U7mG4zUHGW3gczhlcZslxE2QiWDOTGJl"
 
 statuscode = 0
 
+longitude = input("Give me a longitude:")
+latitude = input("Give me a latitude:")
+
 # Accessing SolCast API for  World Solar radiation Data at point Content should include estimated actuals
 
-def world_sol_radiation_data_api():
+def world_sol_radiation_data_api(long,lati):
 
   response = requests.get(
 
                 "https://api.solcast.com.au/world_radiation/estimated_actuals.json",
                 params = {
                     'api_key':solcast_api_key,
-                    'latitude':33.895,
-                     'longitude': -118.308}
+                    'latitude':latitude,
+                     'longitude': longitude}
                      ) # Specify Longitude, langitude
 
 
@@ -36,7 +35,7 @@ def world_sol_radiation_data_api():
 
 # Accessing Solcast API for Rooftop Sites at point Content should include estimated actuals
 
-def rooftop_sites():
+def rooftop_sites(resourceid):
 
   response = requests.get(
        "https://api.solcast.com.au/rooftop_sites/{a6b0-f9cc-4e61-89c5}/estimated_actuals.json",
@@ -58,7 +57,6 @@ def rooftop_sites():
 def world_pv_power():
 
    response = requests.get(
-<<<<<<< HEAD
        "https://api.solcast.com.au/world_pv_power/estimated_actuals.json",
        params = {
            'api_key': solcast_api_key,
@@ -70,16 +68,13 @@ def world_pv_power():
    statuscode = response.status_code
    print(statuscode)
    api_content = response.json()
-   print(api_content)
+   return api_content
 
-=======
-
-   )
->>>>>>> 17bdec3f906003ac8e554c19138a388c35c3de8e
 
 # get data from api
-raw_world_data = world_sol_radiation_data_api()['estimated_actuals']
+raw_world_data = world_sol_radiation_data_api(longitude,latitude)['estimated_actuals']
 raw_rooftop_data = rooftop_sites()['estimated_actuals']
+raw_worldpv_data = world_pv_power()['estimated_actuals']
 
 # convert json data into dictionary readable by panda - bring over to main branch
 def convert_data(raw_data):
@@ -98,10 +93,8 @@ def convert_data(raw_data):
 
 world_df = convert_data(raw_world_data)
 rooftop_df = convert_data(raw_rooftop_data)
+worldpvdf = convert_data(raw_worldpv_data)
 
-<<<<<<< HEAD
-print(world_df.head(25))
-=======
 # create a list of times from 'period_end' - these will be our axis labels
 def time_labels(data_frame):
     times = []
@@ -121,6 +114,5 @@ plt.title('ghi: estimated actual')
 plt.xlabel('Time (GMT+0)')
 plt.ylabel('ghi')
 plt.xticks(world_df['period_end'], world_df['period_end_time'], rotation = 'vertical')
-plt.subplots_adjust(right=4, top = 2)
+plt.subplots_adjust(right=3, top = 1)
 plt.show()
->>>>>>> 17bdec3f906003ac8e554c19138a388c35c3de8e
