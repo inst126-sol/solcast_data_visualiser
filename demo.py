@@ -1,14 +1,16 @@
 import requests
 import json
 import pandas as pd
+
 import matplotlib.pyplot as plt
 import numpy as np
-api_base = 'https://api.solcast.com.au'
+
 
 solcast_api_key =  "U7mG4zUHGW3gczhlcZslxE2QiWDOTGJl"
 #api_key = "U7mG4zUHGW3gczhlcZslxE2QiWDOTGJl"
 
 statuscode = 0
+
 
 longitude = input("Give me a longitude:")
 latitude = input("Give me a latitude:")
@@ -17,6 +19,7 @@ latitude = input("Give me a latitude:")
 
 def world_sol_radiation_data_api(long,lati):
 
+
   response = requests.get(
 
                 "https://api.solcast.com.au/world_radiation/estimated_actuals.json",
@@ -24,7 +27,7 @@ def world_sol_radiation_data_api(long,lati):
                     'api_key':solcast_api_key,
                     'latitude':latitude,
                      'longitude': longitude}
-                     ) # Specify Longitude, langitude
+
 
 
   statuscode = response.status_code
@@ -57,6 +60,7 @@ def rooftop_sites(resourceid):
 def world_pv_power():
 
    response = requests.get(
+
        "https://api.solcast.com.au/world_pv_power/estimated_actuals.json",
        params = {
            'api_key': solcast_api_key,
@@ -75,6 +79,7 @@ def world_pv_power():
 raw_world_data = world_sol_radiation_data_api(longitude,latitude)['estimated_actuals']
 raw_rooftop_data = rooftop_sites()['estimated_actuals']
 raw_worldpv_data = world_pv_power()['estimated_actuals']
+
 
 # convert json data into dictionary readable by panda - bring over to main branch
 def convert_data(raw_data):
