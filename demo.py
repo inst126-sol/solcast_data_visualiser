@@ -88,7 +88,7 @@ def time_labels(data_frame):
 def plot_ghi():
     # plot world_df as lineplot
     plt.plot('period_end','ghi', data=world_df)
-    plt.title('ghi: estimated actual')
+    plt.title('fig. 1, ghi: estimated actual')
     plt.xlabel('Time (GMT+0)')
     plt.ylabel('ghi (W/m^2)')
     plt.xticks(world_df['period_end'], world_df['period_end_time'], rotation = 'vertical')
@@ -98,7 +98,7 @@ def plot_ghi():
 def plot_ebh():
     # plot world_df as lineplot
     plt.plot('period_end','ebh', data=world_df)
-    plt.title('ebh: estimated actual')
+    plt.title('fig. 1, ebh: estimated actual')
     plt.xlabel('Time (GMT+0)')
     plt.ylabel('ebh (W/m^2)')
     plt.xticks(world_df['period_end'], world_df['period_end_time'], rotation = 'vertical')
@@ -108,7 +108,7 @@ def plot_ebh():
 def plot_dhi():
     # plot world_df as lineplot
     plt.plot('period_end','dhi', data=world_df)
-    plt.title('dhi: estimated actual')
+    plt.title('fig. 1, dhi: estimated actual')
     plt.xlabel('Time (GMT+0)')
     plt.ylabel('dhi (W/m^2)')
     plt.xticks(world_df['period_end'], world_df['period_end_time'], rotation = 'vertical')
@@ -118,7 +118,7 @@ def plot_dhi():
 def plot_dni():
     # plot world_df as lineplot
     plt.plot('period_end','dni', data=world_df)
-    plt.title('dni: estimated actual')
+    plt.title('fig. 1, dni: estimated actual')
     plt.xlabel('Time (GMT+0)')
     plt.ylabel('dni (W/m^2)')
     plt.xticks(world_df['period_end'], world_df['period_end_time'], rotation = 'vertical')
@@ -128,7 +128,7 @@ def plot_dni():
 def plot_pv_estimate():
     # plot rooftop as lineplot
     plt.plot('period_end','pv_estimate', data=worldpv_df)
-    plt.title('pv estimate (): estimated actual')
+    plt.title('fig. 2, pv estimate: estimated actual')
     plt.xlabel('Time (GMT+0)')
     plt.ylabel('pv estimate')
     plt.xticks(worldpv_df['period_end'], worldpv_df['period_end_time'], rotation = 'vertical')
@@ -193,12 +193,16 @@ while (address.lower().strip() is not "done") and (i < 5):
         worldpv_df['period_end_time'] = time_labels(worldpv_df)
         if variable_request == "ghi":
             plot_ghi()
+            print('Figure 1: Global Horizontal Irradiance (GHI, W/m2): The total irradiance received on a horizontal surface. It is the sum of the horizontal components of direct (beam) and diffuse irradiance. GHI = DNI*cosθ + DHI.')
         elif variable_request == "ebh":
             plot_ebh()
+            print('Figure 1: Direct (Beam) Horizontal Irradiance (EBH, W/m2): The horizontal component of Direct Normal Irradiance.'
         elif variable_request == "dhi":
             plot_dhi()
+            print('Diffuse Horizontal Irradiance (DIF, DHI, W/m2): The horizontal component of diffuse irradiance (irradiance that is scattered by the atmosphere). When passing through the atmosphere, the solar radiation is scattered, reflected, and absorbed by air molecules, aerosol particles, water droplets and ice crystals in clouds. This produces diffuse solar radiation.')
         elif variable_request == "dni":
             plot_dni()
+            print('Figure 1: Direct Normal Irradiance (DNI, W/m2): Solar irradiance arriving in a direct line from the sun as measured on a surface held perpendicular to the sun. As the sun moves down, the Direct Normal Irradiance (DNI) beam strikes the Earth’s surface obliquely, and spreads out, reducing the amount of energy per unit area as a cosine function.')
         elif variable_request == "done":
           break
         plot_pv_estimate()
