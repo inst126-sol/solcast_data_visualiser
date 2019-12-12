@@ -29,7 +29,7 @@ print(city)
 print(state)
 print(zip_code)
 
-#house_number = input("Enter a house or street number: ")
+#house_number = input("Enter a house or street number: ")g
 #street = input("Enter a street name: ")
 #city =  input("Enter city name: ")
 #country = input("Enter the country address: ")
