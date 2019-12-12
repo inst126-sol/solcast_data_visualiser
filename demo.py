@@ -1,6 +1,7 @@
 import requests
 import json
 import pandas as pd
+%matplotlib inline
 import matplotlib.pyplot as plt
 import numpy as np
 
